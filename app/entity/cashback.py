@@ -16,4 +16,6 @@ class Cashback():
 #cash = Cashback()
 #cash.compute_cashback(1200)
 
-
+from cryptography.fernet import Fernet
+key = Fernet.generate_key()
+print(key)

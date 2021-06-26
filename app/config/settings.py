@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     """ Configurações globais """
 
     API_V1: str = "/api/v1"
+    SECRET_KEY: str = 'PrHWIkt3sLDY6l7xA0A7WaaNeKoLVUKDlYAyGAgLIng='
 
 
 settings = Settings()
