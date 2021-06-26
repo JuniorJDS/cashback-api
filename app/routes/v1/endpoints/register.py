@@ -1,10 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
-from app.schemas.user import UserBody
-from app.services.cryptography import encrypt, decrypt
+from app.schemas.user import UserRegister, UserLogin
 #from loguru import logger
-
-
 
 
 router = APIRouter()
@@ -17,8 +14,8 @@ responses = {
 }
 
 
-@router.post('', summary='register', status_code=HTTP_201_CREATED, responses={**responses})
-async def get_register(user: UserBody):
+@router.post('/register', summary='register', status_code=HTTP_201_CREATED, responses={**responses})
+async def create_user(user: UserRegister):
     """
     Endpoint responsável por cadastrar um novo revendedor(a)
 
@@ -28,8 +25,25 @@ async def get_register(user: UserBody):
     - **email**: email do revendedor(a).
     - **password**: senha de acesso.
     """
-    # encripitar cpf, email e password
-    # salvar as informações no banco de dados
-    print(user.name)
-    print(encrypt(user.name))
+    # recebe os parametros e envia para o Services
+
+    # Se ok, 'Usuário Cadastrado!!!'
+
+    # verificar se já existe o usuário.
+
+    return user
+
+
+@router.post('/login', summary='login', responses={**responses})
+async def register_user(user: UserLogin):
+    """
+    Endpoint responsável por logar um revendedor e validar suas credenciais.
+
+    Parâmetros:
+    - **email**: email do revendedor(a).
+    - **password**: senha de acesso.
+    """
+    # recebe os parametros e consulta o banco de dados
+    # se não existe - retorna um 404
+    # se encontrar - retorna um 200 e token de acesso
     return user
