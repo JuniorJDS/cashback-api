@@ -4,4 +4,8 @@ pytest==6.2.4
 requests==2.25.1
 python-dotenv==0.15.0
 loguru==0.5.3
-cryptography==3.4.7
+cryptography==2.8
+python-jose==3.3.0
+passlib==1.7.4
+SQLAlchemy==1.4.19
+psycopg2-binary==2.8.6

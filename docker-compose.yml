@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    ports:
+      - 8000:8000
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://cashback123:cashback123@db/cashback_db
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=cashback123
+      - POSTGRES_PASSWORD=cashback123
+      - POSTGRES_DB=cashback_db
+    ports:
+      - 5433:5432

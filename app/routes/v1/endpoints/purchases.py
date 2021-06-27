@@ -5,8 +5,6 @@ from app.schemas.purchase import PurchaseBody, PurchaseDb
 #from loguru import logger
 
 
-
-
 router = APIRouter()
 
 
@@ -72,3 +70,17 @@ async def delete_purchase_by_id(id: str):
     # chama services para remover compra
     
     return "compra Removida"
+
+
+@router.get('/acumCashback', summary='Cashback Acumulado', responses={**responses})
+async def list_acum_cashback():
+    """
+    Endpoint responsável por retornar o cashback acumulado do usuário.
+    """
+    # pega o userId pela autenticação e busca o cpf
+    # fake_userId = 'abcd123asder'
+
+    # com o cpf consulta outra API
+    
+    # retorna o cashback acumulado
+    return []

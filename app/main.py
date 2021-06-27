@@ -11,9 +11,13 @@ from starlette.status import HTTP_400_BAD_REQUEST
 from loguru import logger
 from app.routes.v1 import api
 from app.config.settings import settings
+from app.repositories.orm import engine
+from app.repositories import models
 
 
 LOG_LEVEL = logging.getLevelName("INFO")
+models.Base.metadata.create_all(bind=engine)
+
 
 
 app = FastAPI()

@@ -29,9 +29,9 @@ async def create_user(user: UserRegister):
 
     # Se ok, 'Usuário Cadastrado!!!'
 
-    # verificar se já existe o usuário.
+    # verificar se já existe o usuário por cpf (chave primária).
 
-    return user
+    return {'Usuário Cadastrado com Sucesso!'}
 
 
 @router.post('/login', summary='login', responses={**responses})
@@ -46,4 +46,8 @@ async def register_user(user: UserLogin):
     # recebe os parametros e consulta o banco de dados
     # se não existe - retorna um 404
     # se encontrar - retorna um 200 e token de acesso
-    return user
+
+    object = {
+        'token': 'asdasakjjdksaldkdjskaldkjdkskal'
+    }
+    return object

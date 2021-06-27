@@ -1,4 +1,4 @@
-from app.services.cryptography import encrypt, decrypt
+from app.services.security import encrypt, decrypt
 
 
 def test_encrypt_decrypt_email():
