@@ -46,8 +46,9 @@ async def create_user(userInfo: UserCreate, db: Session = Depends(get_db)):
 
 @router.post('/login', summary='login', responses={**responses})
 async def register_user(
-    user: UserLogin, 
-    db: Session = Depends(get_db)
+    #user: UserLogin, 
+    db: Session = Depends(get_db),
+    form_data: OAuth2PasswordRequestForm = Depends()
     ):
     """
     Endpoint responsável por logar um revendedor e validar suas credenciais.
@@ -56,7 +57,7 @@ async def register_user(
     - **email**: email do revendedor(a).
     - **password**: senha de acesso.
     """
-    user = userDb.authenticate(db, user)
+    user = userDb.authenticate(db, email=form_data.username, password=form_data.password)
     if not user:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Email ou Password incorreto.")
 

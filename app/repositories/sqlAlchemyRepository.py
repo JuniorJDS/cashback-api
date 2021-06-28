@@ -24,11 +24,11 @@ class SqlAlchemyRepository(AbstractRepository):
     def list_by_id(self, db: Session, id: str):
         return db.query(self.model).filter(self.model.id == id).first()
     
-    def authenticate(self, db: Session, user: UserLogin):
-        userInfo = self.list_by_email(db, email=user.email)
+    def authenticate(self, db: Session, email: str, password: str):
+        userInfo = self.list_by_email(db, email=email)
         if not userInfo:
             return None
-        if not verify_password(user.password, userInfo.password):
+        if not verify_password(password, userInfo.password):
             return None
         return userInfo
     
