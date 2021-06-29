@@ -10,3 +10,4 @@ passlib==1.7.4
 SQLAlchemy==1.4.19
 psycopg2-binary==2.8.6
 python-multipart==0.0.5
+Faker==8.8.2

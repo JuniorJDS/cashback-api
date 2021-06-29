@@ -29,7 +29,7 @@ async def create_user(userInfo: UserCreate, db: Session = Depends(get_db)):
     Endpoint responsável por cadastrar um novo revendedor(a)
 
     Parâmetros:
-    - **name**: nome do revendedor(a).
+    - **fullName**: nome do revendedor(a).
     - **cpf**: cpf válido do revendedor(a).
     - **email**: email do revendedor(a).
     - **password**: senha de acesso.
