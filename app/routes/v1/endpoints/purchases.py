@@ -82,13 +82,19 @@ async def update_purchase_by_id(
     if user.id != obj.userId:
         raise HTTPException(status_code=HTTP_403_FORBIDDEN, detail="Acesso Negado.")
 
+    value, percent = cash.compute_cashback(purchase.price)
+
     _purchase = {
             key: value for key, value in purchase if value
         }
-    print(_purchase.values())
-    obj_updated = None#_purchase.value()#purchaseDb.update(db, id, PurchaseUpdate(**_purchase.values))
-    
-    
+
+    purchase_update = {
+        **_purchase,
+        "percentCashBack": percent,
+        "valueCashBack": value
+        }
+
+    obj_updated = purchaseDb.update(db, id, purchase_update)
     return obj_updated
 
 
@@ -109,7 +115,6 @@ async def delete_purchase_by_id(
         raise HTTPException(status_code=HTTP_403_FORBIDDEN, detail="Acesso Negado.")
     
     purchaseDb.delete(db, obj)
-    
     return {"message": "compra Removida"}
 
 
@@ -120,10 +125,6 @@ async def list_acum_cashback(
     """
     Endpoint responsável por retornar o cashback acumulado do usuário.
     """
-    # pega o userId pela autenticação e busca o cpf
-    # fake_userId = 'abcd123asder'
 
-    # com o cpf consulta outra API
-    
-    # retorna o cashback acumulado
-    return []
+    api = f'https://mdaqk8ek5j.execute-api.us-east-1.amazonaws.com/v1/cashback?cpf={user.cpf}'
+    return api

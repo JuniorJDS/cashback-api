@@ -27,13 +27,10 @@ class purchaseRepository(AbstractRepository):
     def list_by_id(self, db: Session, id: str):
         return db.query(self.model).filter(self.model.id == id).first()
     
-    def update(self, db: Session, id: str, purchase: PurchaseUpdate):
-        # CORRIGIR NeCESSITA
-        obj = db.query(self.model).filter(self.model.id == id).update(purchase)
+    def update(self, db: Session, id: str, purchase):
+        db.query(self.model).filter(self.model.id == id).update(purchase)
         db.commit()
-        db.refresh(obj)
-
-        return obj
+        return self.list_by_id(db, id)
     
     def delete(self, db: Session, obj):
         db.delete(obj)
