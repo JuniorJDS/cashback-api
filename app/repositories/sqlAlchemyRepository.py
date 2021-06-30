@@ -31,15 +31,6 @@ class SqlAlchemyRepository(AbstractRepository):
         if not verify_password(password, userInfo.password):
             return None
         return userInfo
-    
-    def list(self):
-        pass
-
-    def update(self):
-        pass
-
-    def delete(self):
-        pass
 
 
 userDb = SqlAlchemyRepository(User)

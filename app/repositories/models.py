@@ -21,11 +21,12 @@ class Purchase(Base):
     __tablename__ = "purchase"
 
     id = Column(postgresql.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
-    #cod = Column(String, index=True)
+    cod = Column(String, index=True)
     price = Column(Float, index=True)
     data = Column(DateTime, default=func.now())
     percentCashBack = Column(Integer, index=True)
     valueCashBack = Column(Float, index=True)
+    status = Column(String(12), index=True)
 
     userId = Column(postgresql.UUID(as_uuid=True), ForeignKey("users.id"))
     owner = relationship("User", back_populates="purchase")
