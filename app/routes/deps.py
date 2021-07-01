@@ -9,7 +9,7 @@ from app.config.settings import settings
 from app.repositories.orm import SessionLocal
 from app.repositories import models
 from app.services import security
-from app.repositories.sqlAlchemyRepository import userDb
+from app.repositories.userRepository import userDb
 from app.schemas.token import TokenPayload
 
 
@@ -41,7 +41,7 @@ def get_current_user(
             status_code=HTTP_403_FORBIDDEN,
             detail="Could not validate credentials",
         )
-    user = userDb.list_by_id(db, id=token_data.sub)
+    user = userDb.get_by_id(db, id=token_data.sub)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user

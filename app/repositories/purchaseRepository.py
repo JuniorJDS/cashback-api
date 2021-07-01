@@ -1,8 +1,8 @@
-from .repository import AbstractRepository
 from sqlalchemy.orm import Session
-from app.schemas.purchase import PurchaseCreate, PurchaseUpdate
-from app.services.security import get_password_hash, verify_password
+
+from app.schemas.purchase import PurchaseCreate
 from app.repositories.models import Purchase
+from .repository import AbstractRepository
 
 
 class purchaseRepository(AbstractRepository):
@@ -24,13 +24,13 @@ class purchaseRepository(AbstractRepository):
     def list_by_user(self, db: Session, userId: str):
         return db.query(self.model).filter(self.model.userId == userId).all()
     
-    def list_by_id(self, db: Session, id: str):
+    def get_by_id(self, db: Session, id: str):
         return db.query(self.model).filter(self.model.id == id).first()
     
     def update(self, db: Session, id: str, purchase):
         db.query(self.model).filter(self.model.id == id).update(purchase)
         db.commit()
-        return self.list_by_id(db, id)
+        return self.get_by_id(db, id)
     
     def delete(self, db: Session, obj):
         db.delete(obj)

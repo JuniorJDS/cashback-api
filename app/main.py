@@ -13,6 +13,7 @@ from app.routes.v1 import api
 from app.config.settings import settings
 from app.repositories.orm import engine
 from app.repositories import models
+from app.services.httpClient import httpClient
 
 
 LOG_LEVEL = logging.getLevelName("INFO")
@@ -79,7 +80,7 @@ setup_logging()
 
 @app.on_event("startup")
 async def startup():
-    pass
+    httpClient.start()
 
 
 @app.on_event("shutdown")

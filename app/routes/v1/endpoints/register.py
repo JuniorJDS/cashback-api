@@ -6,7 +6,7 @@ from sqlalchemy.orm.session import Session
 from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 from app.schemas.user import UserCreate, UserLogin
 from app.routes.deps import get_db
-from app.repositories.sqlAlchemyRepository import userDb
+from app.repositories.userRepository import userDb
 from app.services.security import create_access_token
 from app.config.settings import settings
 from fastapi.security import OAuth2PasswordRequestForm
